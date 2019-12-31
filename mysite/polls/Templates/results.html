@@ -1,0 +1,16 @@
+
+
+<body bgcolor="#D3D3D3">
+
+<h1 style="line-height: 100px;font-size:60px;", align="center">Question: {{ question.question_text }}</h1>
+
+<div style="font-style: italic;margin-left:100px;font-size:20px;">
+<ul>
+{% for choice in question.choice_set.all %}
+    <li>{{ choice.choice_text }} -- {{ choice.votes }} vote{{ choice.votes|pluralize }}</li>
+{% endfor %}
+</ul>
+
+<a href="{% url 'polls:detail' question.id %}">Vote again?</a>
+</div>
+</body>

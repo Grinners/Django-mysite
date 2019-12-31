@@ -1,0 +1,24 @@
+
+{% load static %}
+
+<link rel="stylesheet" type="text/css" href="{% static 'polls/style.css' %}">
+
+
+<body bgcolor="#D3D3D3">
+
+<h1 style="font-size: 100;line-height: 200px;color:#FFD700;", align="center">{{ question.question_text }}</h1>
+
+{% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+<div style="font-size:30px;line-height:60px; margin-left: 100px; color: #FF7F50;">
+<form action="{% url 'polls:vote' question.id %}" method="post">
+{% csrf_token %}
+{% for choice in question.choice_set.all %}
+    <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}">
+    <label for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label><br>
+{% endfor %}
+
+<input type="submit" value="Vote">
+</form>
+</div>
+
+</body>
